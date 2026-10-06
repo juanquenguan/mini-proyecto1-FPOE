@@ -1,0 +1,105 @@
+/* Styles for Escritura Rápida */
+
+/* Window background */
+.root-pane {
+    -fx-background-color: #eef2f7;
+    -fx-font-family: "System";
+}
+
+/* Title */
+.title {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e3a5f;
+}
+
+/* Level and time */
+.info-text {
+    -fx-font-size: 16px;
+    -fx-text-fill: #34495e;
+}
+
+/* Time bar */
+.progress-bar > .bar {
+    -fx-background-color: #27ae60;
+    -fx-background-radius: 4;
+}
+
+.progress-bar > .track {
+    -fx-background-radius: 4;
+}
+
+/* Instruction */
+.rule {
+    -fx-font-size: 13px;
+    -fx-text-fill: #7f8c8d;
+}
+
+/* Word to type */
+.word {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+    -fx-background-color: white;
+    -fx-background-radius: 8;
+    -fx-border-color: #d0d7e2;
+    -fx-border-radius: 8;
+    -fx-padding: 10 25 10 25;
+}
+
+/* Answer field */
+.text-field {
+    -fx-font-size: 16px;
+    -fx-max-width: 420px;
+    -fx-background-radius: 6;
+    -fx-border-color: #b8c2d1;
+    -fx-border-radius: 6;
+    -fx-padding: 6 10 6 10;
+}
+
+.text-field:focused {
+    -fx-border-color: #2980b9;
+}
+
+/* Buttons (shared style) */
+.validate, .restart {
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-padding: 8 22 8 22;
+    -fx-cursor: hand;
+}
+
+/* Validate button */
+.validate {
+    -fx-background-color: #2980b9;
+}
+
+.validate:hover {
+    -fx-background-color: #3498db;
+}
+
+/* Restart button */
+.restart {
+    -fx-background-color: #95a5a6;
+}
+
+.restart:hover {
+    -fx-background-color: #7f8c8d;
+}
+
+/* Feedback message */
+.message {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #555555;
+}
+
+/* Optional: add these from the controller depending on the result */
+.message.success {
+    -fx-text-fill: #27ae60;
+}
+
+.message.error {
+    -fx-text-fill: #c0392b;
+}

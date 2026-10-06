@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="16.0" styleClass="root-pane" stylesheets="@stylesGameView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escriturarapida.controller.GameController">
+   <children>
+      <Label styleClass="title" text="Escritura  Rapida" />
+      <HBox alignment="CENTER" spacing="40.0">
+         <children>
+            <Label fx:id="levelLabel" styleClass="info-text" text="Nivel: 1" />
+            <Label fx:id="timeLabel" styleClass="info-text" text="Tiempo: 20 s" />
+         </children>
+      </HBox>
+      <ProgressBar fx:id="timeBar" prefWidth="420.0" progress="1.0" />
+      <Label styleClass="rule" text="Escribe exactamente esta palabra o frase:" />
+      <Label fx:id="wordLabel" styleClass="word" text="Palabra" />
+      <TextField fx:id="answerField" />
+      <HBox alignment="CENTER" spacing="40.0">
+         <children>
+            <Button fx:id="validateButton" mnemonicParsing="false" onAction="#onValidateAnswer" styleClass="validate" text="Validar" />
+            <Button mnemonicParsing="false" onAction="#onRestartGame" styleClass="restart" text="Reiniciar" />
+         </children>
+      </HBox>
+      <Label fx:id="messageLabel" styleClass="message" />
+   </children>
+   <padding>
+      <Insets bottom="25.0" left="30.0" right="30.0" top="25.0" />
+   </padding>
+</VBox>
