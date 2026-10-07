@@ -10,7 +10,7 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="16.0" styleClass="root-pane" stylesheets="@stylesGameView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escriturarapida.controller.GameController">
    <children>
-      <Label styleClass="title" text="Escritura  Rapida" />
+      <Label styleClass="title" text="Escritura rápida" />
       <HBox alignment="CENTER" spacing="40.0">
          <children>
             <Label fx:id="levelLabel" styleClass="info-text" text="Nivel: 1" />
@@ -20,14 +20,14 @@
       <ProgressBar fx:id="timeBar" prefWidth="420.0" progress="1.0" />
       <Label styleClass="rule" text="Escribe exactamente esta palabra o frase:" />
       <Label fx:id="wordLabel" styleClass="word" text="Palabra" />
-      <TextField fx:id="answerField" />
+      <TextField fx:id="answerField" promptText="Escribe aquí y presiona Enter" />
       <HBox alignment="CENTER" spacing="40.0">
          <children>
-            <Button fx:id="validateButton" mnemonicParsing="false" onAction="#onValidateAnswer" styleClass="validate" text="Validar" />
+            <Button fx:id="validateButton" mnemonicParsing="false" onMouseClicked="#onValidateButtonClicked" styleClass="validate" text="Validar" />
             <Button mnemonicParsing="false" onAction="#onRestartGame" styleClass="restart" text="Reiniciar" />
          </children>
       </HBox>
-      <Label fx:id="messageLabel" styleClass="message" />
+      <Label fx:id="messageLabel" styleClass="message" wrapText="true" />
    </children>
    <padding>
       <Insets bottom="25.0" left="30.0" right="30.0" top="25.0" />

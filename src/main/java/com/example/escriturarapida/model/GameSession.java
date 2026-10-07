@@ -7,6 +7,7 @@ public class GameSession {
     private static final int LEVELS_PER_REDUCTION = 5;
     private static final int TIME_REDUCTION_SECONDS = 2;
     private static final int MIN_TIME_SECONDS = 2;
+    private static final int MAX_LEVEL = 50;
 
     private final String[] texts = {
             "Java",
@@ -95,17 +96,17 @@ public class GameSession {
     }
 
     /**
-     * Returns the current level number.
+     * Returns the current level number, capped at the maximum level.
      *
-     * @return the completed level count plus one
+     * @return the current level number, up to the maximum level
      */
-    public int getCurrentLevel(){
-        return completedLevels + 1;
+    public int getCurrentLevel() {
+        return Math.min(completedLevels + 1, MAX_LEVEL);
     }
 
     /**
-     * Records a completed level and prepares the next level's difficulty,
-     * target text, and countdown.
+     * Records a completed level and finishes the game when the maximum
+     * level is completed. Otherwise, prepares the next level.
      */
     public void advanceLevel() {
         if (finished) {
@@ -113,6 +114,12 @@ public class GameSession {
         }
 
         completedLevels++;
+
+        if (completedLevels >= MAX_LEVEL) {
+            finish();
+            return;
+        }
+
         timeLimitSeconds = calculateTimeLimit();
 
         selectRandomText();
