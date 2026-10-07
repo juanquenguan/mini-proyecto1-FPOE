@@ -62,7 +62,7 @@ public class GameController {
     @FXML
     private void initialize() {
         showCurrentLevel();
-        showMessage("Escribe el texto exactamente como aparece.", "");
+        showMessage("Presiona Enter para validar", "");
 
         AnswerKeyboardHandler keyboardHandler = new AnswerKeyboardHandler();
 
@@ -226,7 +226,7 @@ public class GameController {
         gameSession = new GameSession();
 
         showCurrentLevel();
-        showMessage("Escribe el texto exactamente como aparece.", "");
+        showMessage("Presiona Enter para validar", "");
 
         startTimer();
 
