@@ -1,3 +1,6 @@
+/**
+ * Game module configuration.
+ */
 module com.example.escriturarapida {
     requires javafx.controls;
     requires javafx.fxml;

@@ -16,29 +16,43 @@ import javafx.util.Duration;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
+
+/**
+ * Connects the game rules with the interface and handles player actions.
+ */
 public class GameController {
 
+    /** Current game session. */
     private GameSession gameSession = new GameSession();
+
+    /** Timer that updates the remaining time every second. */
     private Timeline timer;
 
+    /** Label that displays the current level. */
     @FXML
     private Label levelLabel;
 
+    /** Label that displays the remaining time. */
     @FXML
     private Label timeLabel;
 
+    /** Progress bar that displays the remaining time proportion. */
     @FXML
     private ProgressBar timeBar;
 
+    /** Label that displays the text the player must type. */
     @FXML
     private Label wordLabel;
 
+    /** Text field where the player enters an answer. */
     @FXML
     private TextField answerField;
 
+    /** Button used to validate the player's answer. */
     @FXML
     private Button validateButton;
 
+    /** Label that displays feedback and the final game summary. */
     @FXML
     private Label messageLabel;
 
@@ -61,8 +75,8 @@ public class GameController {
     }
 
     /**
-    * Validates the current answer and displays feedback
-    */
+     * Validates the current answer and displays feedback.
+     */
     @FXML
     private void onValidateAnswer() {
         if (gameSession.isFinished()) {
@@ -98,6 +112,11 @@ public class GameController {
      */
     private class TimerHandler implements EventHandler<ActionEvent> {
 
+        /**
+         * Updates the countdown and handles time expiration.
+         *
+         * @param event the timer event
+         */
         @Override
         public void handle (ActionEvent event) {
             gameSession.decreaseRemainingTime();
@@ -111,7 +130,7 @@ public class GameController {
 
 
     /**
-     * Starts a countdown with one update per cycle.
+     * Starts a countdown that updates every second.
      */
     private void startTimer() {
         timer=new Timeline(
@@ -142,7 +161,7 @@ public class GameController {
             answerField.setDisable(true);
             validateButton.setDisable(true);
 
-            showGameSummary();
+            showGameSummary("Tiempo agotado", "error");
         }
     }
 
@@ -163,34 +182,43 @@ public class GameController {
     }
 
     /**
-     * Completes the current level and starts the next one.
+     * Records a correct answer and either displays the final summary
+     * or starts the next level.
      */
-    private void handleCorrectAnswer(){
+    private void handleCorrectAnswer() {
         timer.stop();
         gameSession.advanceLevel();
+
+        if (gameSession.isFinished()) {
+            answerField.setDisable(true);
+            validateButton.setDisable(true);
+
+            showGameSummary("Nivel máximo completado", "success");
+            return;
+        }
+
         showCurrentLevel();
         showMessage("Correcto! Nivel superado.", "success");
         startTimer();
-
     }
 
     /**
      * Displays the final game summary.
+     *
+     * @param reason the reason the game ended
+     * @param feedbackStyle the CSS class for the feedback
      */
-    private void showGameSummary (){
-
-        String summary = "Fin de la partida " + "tiempo agotado" + ".\n"
+    private void showGameSummary(String reason, String feedbackStyle) {
+        String summary = "Fin de la partida: " + reason + ".\n"
                 + "Niveles completados: " + gameSession.getCompletedLevels() + ".\n"
-                + "Tiempo restante: " + gameSession.getRemainingSeconds() + "s";
+                + "Tiempo restante: " + gameSession.getRemainingSeconds() + " s";
 
-        showMessage(summary, "error");
-
+        showMessage(summary, feedbackStyle);
     }
 
     /**
-     * Restarts the game
+     * Starts a new game session from level one.
      */
-
     @FXML
     private void onRestartGame () {
         timer.stop();
@@ -211,7 +239,10 @@ public class GameController {
     private class AnswerKeyboardHandler extends KeyboardAdapter {
 
         /**
-         * Handles Enter and leaves other keys unchanged.
+         * Validates the answer when Enter is pressed.
+         * Consumes the Enter event.
+         *
+         * @param event the key press event
          */
         @Override
         public void onKeyPressed(KeyEvent event) {

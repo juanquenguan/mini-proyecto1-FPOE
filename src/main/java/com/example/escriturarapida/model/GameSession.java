@@ -1,14 +1,27 @@
 package com.example.escriturarapida.model;
 import java.util.Random;
 
+/**
+ * Stores the game state and manages level progression and time limits.
+ */
 public class GameSession {
 
+    /** Initial time limit per level, in seconds. */
     private static final int INITIAL_TIME_SECONDS = 20;
+
+    /** Number of completed levels required for each time reduction. */
     private static final int LEVELS_PER_REDUCTION = 5;
+
+    /** Time reduction applied after each group of completed levels, in seconds. */
     private static final int TIME_REDUCTION_SECONDS = 2;
+
+    /** Minimum time limit per level, in seconds. */
     private static final int MIN_TIME_SECONDS = 2;
+
+    /** Maximum number of levels the player can complete. */
     private static final int MAX_LEVEL = 50;
 
+    /** Words and phrases available for the game. */
     private final String[] texts = {
             "Java",
             "Hola, mundo!",
@@ -16,11 +29,22 @@ public class GameSession {
             "Programación con JavaFX"
     };
 
+    /** Random generator used to select the target text. */
     private final Random random = new Random();
+
+    /** Time limit for the current level, in seconds. */
     private int timeLimitSeconds = INITIAL_TIME_SECONDS;
+
+    /** Remaining time for the current level, in seconds. */
     private int remainingSeconds = timeLimitSeconds;
+
+    /** Text the player must reproduce exactly. */
     private String targetText;
+
+    /** Indicates whether the game session has ended. */
     private boolean finished = false;
+
+    /** Number of levels successfully completed by the player. */
     private int completedLevels = 0;
 
     /**
@@ -30,32 +54,47 @@ public class GameSession {
         selectRandomText();
     }
 
+    /**
+     * Returns the text the player must type.
+     *
+     * @return the target word or phrase
+     */
     public String getTargetText() {
         return targetText;
     }
+
     /**
-     * Checks whether the given answer exactly matches the target text.
+     * Checks whether the answer exactly matches the target text.
+     *
+     * @param answer the text entered by the player
+     * @return true if the answer matches exactly; false otherwise
      */
     public boolean isCorrectAnswer (String answer) {
         return targetText.equals(answer);
     }
 
+    /**
+     * Selects a random word or phrase for the current level.
+     */
     public void selectRandomText() {
         int index = random.nextInt(texts.length);
         targetText= texts[index];
     }
 
     /**
-     * Returns tbe time limit for the current level
+     * Returns the time limit for the current level.
+     *
+     * @return the time limit in seconds
      */
     public int getTimeLimitSeconds () {
         return timeLimitSeconds;
     }
 
     /**
-     * Returns the remaining time.
+     * Returns the remaining time for the current level.
+     *
+     * @return the remaining time in seconds
      */
-
     public int getRemainingSeconds () {
         return  remainingSeconds;
     }
@@ -63,7 +102,6 @@ public class GameSession {
     /**
      * Decreases the remaining time without going below zero.
      */
-
     public void decreaseRemainingTime() {
         if (remainingSeconds > 0) {
             remainingSeconds--;
@@ -125,6 +163,7 @@ public class GameSession {
         selectRandomText();
         remainingSeconds = timeLimitSeconds;
     }
+
     /**
      * Calculates the level time limit from the completed level count.
      *
@@ -137,8 +176,6 @@ public class GameSession {
 
         return Math.max(MIN_TIME_SECONDS, calculatedTime);
     }
-
-
 
 }
 
