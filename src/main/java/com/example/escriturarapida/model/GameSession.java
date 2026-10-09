@@ -10,7 +10,7 @@ public class GameSession {
     private static final int INITIAL_TIME_SECONDS = 20;
 
     /** Number of completed levels required for each time reduction. */
-    private static final int LEVELS_PER_REDUCTION = 5;
+    private static final int LEVELS_PER_REDUCTION = 4;
 
     /** Time reduction applied after each group of completed levels, in seconds. */
     private static final int TIME_REDUCTION_SECONDS = 2;
@@ -19,14 +19,29 @@ public class GameSession {
     private static final int MIN_TIME_SECONDS = 2;
 
     /** Maximum number of levels the player can complete. */
-    private static final int MAX_LEVEL = 50;
+    private static final int MAX_LEVEL = 35;
 
     /** Words and phrases available for the game. */
     private final String[] texts = {
             "Java",
             "Hola, mundo!",
             "Eventos de teclado",
-            "Programación con JavaFX"
+            "Programación con JavaFX",
+            "Desarrollo de software",
+            "Nunca parar de aprender",
+            "Buen trabajo",
+            "Sigue practicando",
+            "Escribe con cuidado",
+            "Aprende algo nuevo",
+            "El código funciona",
+            "Vamos a programar",
+            "Prueba otra vez",
+            "Todo tiene solución",
+            "La práctica ayuda",
+            "Piensa antes de escribir",
+            "Un paso a la vez",
+            "Hoy toca aprender",
+            "El tiempo corre",
     };
 
     /** Random generator used to select the target text. */
@@ -77,8 +92,14 @@ public class GameSession {
      * Selects a random word or phrase for the current level.
      */
     public void selectRandomText() {
+    String newText;
+
+    do {
         int index = random.nextInt(texts.length);
-        targetText= texts[index];
+        newText = texts[index];
+    } while (newText.equals(targetText));
+
+    targetText = newText;
     }
 
     /**
